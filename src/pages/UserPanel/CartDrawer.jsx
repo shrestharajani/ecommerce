@@ -1,5 +1,5 @@
 import { Drawer, Button, Card, Row, Col } from 'antd';
-import { LeftOutlined, ArrowRightOutlined, DeleteOutlined } from '@ant-design/icons'
+import { LeftOutlined, DeleteOutlined } from '@ant-design/icons'
 import { Link } from 'react-router-dom';
 import emptyCard from '../../images/empty-cart.png'
 import { useDispatch, useSelector } from 'react-redux';
@@ -20,7 +20,7 @@ export const CartDrawer = ({ onClose, visible }) => {
           borderColor: 'coral',
           color: 'coral',
         }} ghost><Link to='/add-to-cart' onClick={onClose}>View Cart</Link></Button>
-        <Button>Checkout<ArrowRightOutlined /></Button>
+        <Link to='/checkout'><Button>Checkout</Button></Link>
       </div >
     </>
   )

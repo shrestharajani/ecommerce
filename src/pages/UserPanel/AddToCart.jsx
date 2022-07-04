@@ -107,7 +107,7 @@ export default function AddToCart() {
 
                 <div className='checkout-buttons'>
                     <Link to='/' style={{ textDecoration: 'underline' }}><ArrowLeftOutlined /> Continue Shopping?</Link>
-                    <Button className='checkout'>Procced to Checkout<ArrowRightOutlined /></Button>
+                    <Link to='/checkout'><Button className='checkout'>Procced to Checkout<ArrowRightOutlined /></Button></Link>
                 </div>
             </div>
         </>
