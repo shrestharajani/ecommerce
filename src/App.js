@@ -38,7 +38,9 @@ import { VodkaDomestic } from "./pages/UserPanel/Vodka/VodkaDomestic";
 import { VodkaImported } from "./pages/UserPanel/Vodka/VodkaImported";
 import { Kodo } from "./pages/UserPanel/Kodo";
 import { FeatureProducts } from "./pages/UserPanel/FeatureProducts";
-import CheckoutPage from "./pages/UserPanel/CheckoutPage";
+import CheckoutPage from "./pages/UserPanel/Checkout/CheckoutPage";
+import Prefooter from "./components/Prefooter";
+import CopyRightFooter from "./components/CopyRightFooter";
 
 const { Header, Content, Footer } = Layout;
 
@@ -158,6 +160,8 @@ function App() {
         <Footer className="ant-footer">
           <FooterPage />
         </Footer>
+        <Prefooter />
+        <CopyRightFooter />
       </Layout>
     </>
   );
