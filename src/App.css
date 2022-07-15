@@ -52,7 +52,7 @@ html {
 .ant-card-cover img {
   max-height: 100%;
   height: auto;
-  width: 30%;
+  width: 60%;
 }
 
 .card-info {
@@ -201,6 +201,59 @@ html {
 
 .add-to-cart {
   margin-top: 1rem;
+  background-color: coral !important;
+  border-color: coral !important;
+}
+.product-column {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.product-column img {
+  max-width: 100%;
+}
+.ant-card-head-title {
+  color: coral;
+}
+.price-tag {
+  display: inline-block;
+  width: auto;
+  height: 2.4rem;
+  background-color: silver;
+  border-radius: 0.2rem 0.3rem 0.3rem 0.2rem;
+  border-left: 1px solid coral;
+  margin-left: 1.9rem;
+  position: relative;
+  color: white;
+  font-weight: 300;
+  font-family: "Source Sans Pro", sans-serif;
+  font-size: 1.4rem;
+  line-height: 2.4rem;
+  padding: 0 10px 0 10px;
+}
+
+.price-tag:before {
+  content: "";
+  position: absolute;
+  display: block;
+  left: -1.2rem;
+  width: 0;
+  height: 0;
+  border-top: 1.2rem solid transparent;
+  border-bottom: 1.2rem solid transparent;
+  border-right: 1.2rem solid silver;
+}
+
+.price-tag:after {
+  content: "";
+  background-color: white;
+  border-radius: 50%;
+  width: 4px;
+  height: 4px;
+  display: block;
+  position: absolute;
+  left: -0.2rem;
+  top: 1rem;
 }
 
 .add-cart {
@@ -248,8 +301,33 @@ html {
   width: 6rem;
 }
 
+.checkout-content {
+  padding: 5rem;
+  margin: 0 3rem 0 0;
+  display: flex;
+  justify-content: center;
+}
+
+.ant-checkbox-input:focus + .ant-checkbox-inner,
+.ant-checkbox-wrapper:hover .ant-checkbox-inner,
+.ant-checkbox:hover .ant-checkbox-inner {
+  border-color: coral !important;
+}
+.ant-checkbox-checked .ant-checkbox-inner {
+  border-color: coral !important;
+  background-color: coral !important;
+}
+.ant-checkbox-checked::after {
+  border: 1px solid coral !important;
+}
+
+.login-form-button {
+  background-color: coral !important;
+  border-color: coral !important;
+}
+
 .form {
-  height: 90vh;
+  height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;

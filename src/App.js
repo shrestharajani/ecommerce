@@ -84,7 +84,7 @@ function App() {
 
   if (pathSnippets[0] === "admin") {
     return (
-      <Layout style={{ height: "90vh" }}>
+      <Layout style={{ height: "100vh" }}>
         <ToastContainer />
         <Content>
           <Routes>

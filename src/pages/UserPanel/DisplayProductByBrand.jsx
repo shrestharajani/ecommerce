@@ -14,7 +14,7 @@ export const DisplayProductByBrand = ({ brand, title }) => {
     return (
         <>
             <h2 style={{ marginTop: '4rem' }}>{title}</h2>
-            <Row justify="space-between">
+            <Row justify="space-between" gutter={[16, 24]}>
                 {product_details.filter(item => item.brand === `${brand}`).map((product) =>
                 (
                     <Col xs={24} sm={12} md={8} lg={6} key={product.id}>

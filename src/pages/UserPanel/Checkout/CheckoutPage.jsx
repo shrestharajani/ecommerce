@@ -21,12 +21,12 @@ export default function CheckoutPage() {
         <>
             <Row style={{ margin: '4rem 0' }}>
                 <Col span={15} className='checkout-info'>
-                    <Steps current={current} onChange={onChange} style={{ width: '90%' }}>
+                    <Steps current={current} onChange={onChange} style={{ width: '95%' }}>
                         {CheckoutContent.map((item) => (
                             <Step key={item.title} title={item.title} />
                         ))}
                     </Steps>
-                    <div>{CheckoutContent[current].content}</div>
+                    <div className='checkout-content'>{CheckoutContent[current].content}</div>
                 </Col>
                 <Col span={9} >
                     <CheckoutCard />

@@ -57,15 +57,16 @@ export const CartDrawer = ({ onClose, visible }) => {
           <Card className='mini-cart--card' key={index} style={{
             marginBottom: '2rem'
           }}>
-            <Row justify='space-between'>
-              <Col className='cart-first-column'>
+            <Row>
+              <Col className='cart-first-column' span={4}>
                 <div className='cart-image'><img src={item.image} alt='not found' /></div>
-                <div>{item.name}</div></Col>
-              <Col>{item.quantity} * {item.price}</Col>
-              <DeleteOutlined
+              </Col>
+              <Col span={12}>{item.name}</Col>
+              <Col span={6}>{item.quantity} * {item.price}</Col>
+              <Col span={2}><DeleteOutlined
                 onClick={() => { deleteCartItem(item.id) }}
                 style={{ cursor: 'pointer', color: 'red' }}
-              />
+              /></Col>
             </Row>
           </Card>
         ))}

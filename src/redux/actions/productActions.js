@@ -108,6 +108,7 @@ export const getSingleProduct = (id) => async (dispatch) => {
 };
 
 export const addProduct = (product) => async (dispatch) => {
+  console.log("product", product);
   dispatch(addProductStart());
 
   const addProduct = await setDoc(

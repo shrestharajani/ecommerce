@@ -1,4 +1,4 @@
-import { FormPage } from "../../../components/Form";
+import { FormPage } from "../../../components/LoginForm";
 import { Slider } from "../Slider";
 
 export const CheckoutContent = [

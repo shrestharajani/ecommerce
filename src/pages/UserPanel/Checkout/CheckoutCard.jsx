@@ -7,7 +7,7 @@ export default function CheckoutCard() {
     const storageCartItem = useSelector(state => state.cartItems)
 
     return (
-        <div style={{ top: '100px', position: 'sticky', zIndex: '2' }}>
+        <div style={{ top: '100px', position: 'sticky' }}>
             <Card title="Card Summary">
                 <h5>{storageCartItem.cart_item.length} items</h5>
                 {storageCartItem.cart_item.length === 0 && <div className='empty-cart'>
@@ -29,7 +29,7 @@ export default function CheckoutCard() {
                     }}
                 >
                     <Row justify='space-between' style={{ marginTop: '2rem' }}>
-                        <Col><b>Total</b></Col>
+                        <Col style={{ color: 'coral' }}><b>Total</b></Col>
                         <Col>{storageCartItem.total}</Col>
                     </Row>
                 </div>

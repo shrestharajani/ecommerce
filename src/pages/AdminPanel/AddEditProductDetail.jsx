@@ -25,8 +25,9 @@ export const AddEditProductDetail = ({ showForm,
         type: "",
         price: "",
         stock: "",
-        quantity: 1
+        quantity: 1,
     })
+
     const [isLoading, setIsLoading] = useState(false)
 
     const singleProduct = useSelector(state => state.productReducer.single_product)
@@ -63,16 +64,16 @@ export const AddEditProductDetail = ({ showForm,
                 icon: "😄"
             });
             dispatch(addProduct(state))
+            setState({})
             showForm(false)
             dispatch(getProduct())
             setToggleAddEdit(true)
-            setState({})
         }
     }
 
     const handleInputChange = (e) => {
         let { name, value } = e.target
-        setState({ ...state, [name]: value })
+        setState({ ...state, [name]: value, quantity: 1 })
     }
 
     const uploadImage = (e) => {
