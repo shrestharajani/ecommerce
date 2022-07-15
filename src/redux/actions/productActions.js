@@ -73,7 +73,6 @@ const editProductFailed = () => ({
 });
 
 export const itemToCart = (product) => {
-  console.log("product to add to cart", product);
   return {
     type: ActionType.ITEM_TO_CART,
     payload: product,
@@ -108,7 +107,6 @@ export const getSingleProduct = (id) => async (dispatch) => {
 };
 
 export const addProduct = (product) => async (dispatch) => {
-  console.log("product", product);
   dispatch(addProductStart());
 
   const addProduct = await setDoc(

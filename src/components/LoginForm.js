@@ -1,5 +1,5 @@
 import { LockOutlined, UserOutlined } from "@ant-design/icons";
-import { Button, Checkbox, Form, Input, Card } from "antd";
+import { Button, Checkbox, Form, Input, Card, Row, Col } from "antd";
 import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import { toggleFrom } from "../redux/actions/actions";
@@ -55,14 +55,6 @@ export const FormPage = () => {
           />
         </Form.Item>
         <Form.Item>
-          <Form.Item name="remember" valuePropName="checked" noStyle>
-            <Checkbox>Remember me</Checkbox>
-          </Form.Item>
-          <a className="login-form-forgot" href="/">
-            Forgot password
-          </a>
-        </Form.Item>
-        <Form.Item>
           <Button
             type="primary"
             htmlType="submit"
@@ -71,15 +63,23 @@ export const FormPage = () => {
           >
             <Link to="/admin/admin-page">Log in</Link>
           </Button>
-          Or{" "}
-          <Link
-            to=""
-            onClick={() => {
-              dispatch(toggleFrom());
-            }}
-          >
-            register now!
-          </Link>
+
+          <Row justify="space-between">
+            <Col>
+              Or{" "}
+              <Link
+                to=""
+                onClick={() => {
+                  dispatch(toggleFrom());
+                }}
+              >
+                register now!
+              </Link>
+            </Col>
+            <a className="login-form-forgot" href="/">
+              Forgot password?
+            </a>
+          </Row>
         </Form.Item>
       </Form>
       <GoogleSign />

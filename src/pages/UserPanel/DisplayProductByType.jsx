@@ -14,7 +14,7 @@ export const DisplayProductByType = ({ brand, title, type }) => {
     return (
         <>
             <h2 style={{ marginTop: '4rem' }}>{title}</h2>
-            <Row justify="space-between" gutter={[0, 24]}>
+            <Row gutter={[0, 24]}>
                 {product_details.filter(item => (item.brand === `${brand}` && item.type === `${type}`))
                     .map((product) =>
                     (

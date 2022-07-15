@@ -1,4 +1,4 @@
-import { Button, Col, Row, Slider } from 'antd'
+import { Button, Col, Row } from 'antd'
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { ArrowLeftOutlined } from '@ant-design/icons'
@@ -7,6 +7,8 @@ import CheckoutCard from './CheckoutCard';
 import { useSelector } from 'react-redux';
 import { FormPage } from '../../../components/LoginForm';
 import { RegisterPage } from '../../../components/RegisterForm';
+import BillingPage from './BillingPage';
+import Payment from './Payment';
 const { Step } = Steps;
 
 export default function CheckoutPage() {
@@ -27,12 +29,12 @@ export default function CheckoutPage() {
         {
             id: 2,
             title: "Billing",
-            content: <Slider />,
+            content: <BillingPage />,
         },
         {
             id: 3,
             title: "Payment",
-            content: <FormPage />,
+            content: <Payment />,
         },
     ];
 

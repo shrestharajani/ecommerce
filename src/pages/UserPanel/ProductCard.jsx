@@ -16,8 +16,6 @@ export default function ProductCard({ product }) {
     const handleCancel = () => {
         setIsModalVisible(false);
     };
-    const [show, setShow] = useState(false);
-    const mouseHover = () => setShow(prev => !prev)
 
     return (
         <>
@@ -25,14 +23,12 @@ export default function ProductCard({ product }) {
                 className='product-card'
                 hoverable
                 style={{ width: 260 }}
-                cover={<><
-                    img alt="example" src={image} />
-                    {/* {show ? <Button type="link"> Download </Button> : null} */}
-                </>}
-                // extra={show ? <Button type="link"> Download </Button> : null}
-                // onMouseEnter={mouseHover}
-                // onMouseLeave={mouseHover}
-                onClick={() => { setIsModalVisible(true) }}
+                cover={<div className='container'>
+                    <img alt="example" src={image} className='card-image' />
+                    <div className='middle'>
+                        <Button block onClick={() => { setIsModalVisible(true) }}> View Details </Button>
+                    </div>
+                </div>}
             >
                 <Meta title={name} />
                 <div className="product-info">
