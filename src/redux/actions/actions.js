@@ -20,3 +20,9 @@ export const toggleContent = (id) => {
     payload: { id },
   };
 };
+
+export const toggleFrom = () => {
+  return {
+    type: ActionType.TOGGLEFORM,
+  };
+};

@@ -110,9 +110,32 @@ html {
   justify-content: center;
 }
 
-.cart-first-column {
+.login-card {
+  border-radius: 15px !important;
+}
+
+.google-sign {
   display: flex;
+  justify-content: center;
   gap: 1rem;
+}
+.google-image {
+  display: flex;
+  height: 2rem;
+}
+.google-image img {
+  max-width: 100%;
+}
+
+.terms {
+  margin-top: 1.5rem;
+  text-align: justify;
+  font-size: 1.1rem;
+  color: #666;
+}
+
+.ant-picker {
+  width: 100% !important;
 }
 
 .cart-image {
@@ -324,6 +347,11 @@ html {
 .login-form-button {
   background-color: coral !important;
   border-color: coral !important;
+}
+
+.buttons {
+  height: 4rem !important;
+  border-radius: 20px !important;
 }
 
 .form {

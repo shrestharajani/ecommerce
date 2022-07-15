@@ -1,8 +1,12 @@
 import { LockOutlined, UserOutlined } from "@ant-design/icons";
 import { Button, Checkbox, Form, Input, Card } from "antd";
+import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
+import { toggleFrom } from "../redux/actions/actions";
+import GoogleSign from "./GoogleSign";
 
 export const FormPage = () => {
+  const dispatch = useDispatch();
   const onFinish = (values) => {
     console.log("Received values of form: ", values);
   };
@@ -12,8 +16,8 @@ export const FormPage = () => {
   };
 
   return (
-    <Card>
-      <h2 style={{ color: "coral" }}>Login</h2>
+    <Card className="login-card">
+      <h1 style={{ color: "coral" }}>Login</h1>
       <Form
         name="normal_login"
         initialValues={{
@@ -26,13 +30,13 @@ export const FormPage = () => {
           rules={[
             {
               required: true,
-              message: "Please input your Username!",
+              message: "Please input your email!",
             },
           ]}
         >
           <Input
             prefix={<UserOutlined className="site-form-item-icon" />}
-            placeholder="Username"
+            placeholder="Email"
           />
         </Form.Item>
         <Form.Item
@@ -62,14 +66,23 @@ export const FormPage = () => {
           <Button
             type="primary"
             htmlType="submit"
-            className="login-form-button"
+            className="login-form-button buttons"
             onClick={onLogin}
           >
             <Link to="/admin/admin-page">Log in</Link>
           </Button>
-          Or <a href="/">register now!</a>
+          Or{" "}
+          <Link
+            to=""
+            onClick={() => {
+              dispatch(toggleFrom());
+            }}
+          >
+            register now!
+          </Link>
         </Form.Item>
       </Form>
+      <GoogleSign />
     </Card>
   );
 };

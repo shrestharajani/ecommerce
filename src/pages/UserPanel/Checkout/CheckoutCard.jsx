@@ -16,10 +16,11 @@ export default function CheckoutCard() {
                 {storageCartItem.cart_item.map((item, index) => (
                     <Card key={index} bordered={false}>
                         <Row justify='space-between'>
-                            <Col className='cart-first-column'>
+                            <Col className='cart-first-column' span={5}>
                                 <div className='cart-image'><img src={item.image} alt='not found' /></div>
-                                <div>{item.quantity} * {item.name}</div></Col>
-                            <Col> {item.price}</Col>
+                            </Col>
+                            <Col span={16}>{item.quantity} * {item.name}</Col>
+                            <Col span={2}> {item.price}</Col>
                         </Row>
                     </Card>
                 ))}

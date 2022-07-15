@@ -6,6 +6,7 @@ const initialState = {
   loading: false,
   error: null,
   index: 1,
+  form_state: true,
 };
 
 export const productReducer = (state = initialState, actions) => {
@@ -39,6 +40,12 @@ export const productReducer = (state = initialState, actions) => {
       return {
         ...state,
         index: id,
+      };
+
+    case ActionType.TOGGLEFORM:
+      return {
+        ...state,
+        form_state: !state.form_state,
       };
 
     case ActionType.GET_PRODUCT:
