@@ -17,6 +17,15 @@ export const cartItems = (state = initialState, actions) => {
         cartItemCount: state.cartItemCount + 1,
       };
 
+    case ActionType.ITEM_DELETE_CART:
+      const { products, total, count } = actions.payload;
+      return {
+        ...state,
+        cart_item: products,
+        total: total,
+        cartItemCount: count,
+      };
+
     default:
       return state;
   }

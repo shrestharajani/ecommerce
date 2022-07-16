@@ -2,11 +2,11 @@ import React, { useState } from "react";
 import { Menu, Row, Col, Input, Dropdown } from "antd";
 import {
   UserOutlined,
-  UserAddOutlined,
   SettingOutlined,
   LogoutOutlined,
   ShoppingCartOutlined,
   DownOutlined,
+  CloseOutlined,
 } from "@ant-design/icons";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
@@ -15,6 +15,8 @@ import { signOut } from "firebase/auth";
 import logo from "../images/drinkitall.png";
 import { HomeContent } from "../pages/UserPanel/HomeContent";
 import { CartDrawer } from "../pages/UserPanel/CartDrawer";
+import { FormPage } from "./LoginForm";
+import { RegisterPage } from "./RegisterForm";
 
 const { Search } = Input;
 
@@ -22,8 +24,10 @@ const { SubMenu, Item } = Menu;
 
 const Navbar = () => {
   const index = useSelector((state) => state.cartItems.cartItemCount);
+  const { form_state } = useSelector((state) => state.productReducer);
   const [current, setCurrent] = useState("home");
   const [visible, setVisible] = useState(false);
+  const [loginform, setLoginForm] = useState(false);
   const showDrawer = () => {
     setVisible(true);
   };
@@ -75,35 +79,8 @@ const Navbar = () => {
           <Search placeholder="Search Products" allowClear size="large" />
         </Col>
 
-        <Col xs={6}>
+        <Col xs={5}>
           <Menu onClick={handleClick} mode="horizontal">
-            {!user && (
-              <Item
-                key="register"
-                icon={<UserAddOutlined />}
-                className="float-right"
-              >
-                <Link to="/register">Register</Link>
-              </Item>
-            )}
-            {!user && (
-              <Item key="login" icon={<UserOutlined />} className="float-right">
-                <Link to="/login">Login</Link>
-              </Item>
-            )}
-            {user && (
-              <SubMenu
-                title={user.email && user.email.split("@")[0]} //name@gmail.com ['name', 'gmail.com']
-                icon={<SettingOutlined />}
-                className="float-right"
-              >
-                <Item key="setting:1">Option 1</Item>
-                <Item key="setting:2">Option 2</Item>
-                <Item icon={<LogoutOutlined />} onClick={logout}>
-                  Logout
-                </Item>
-              </SubMenu>
-            )}
             <Item key="add-to-cart">
               <div className="add-cart" onClick={showDrawer}>
                 <div>
@@ -118,6 +95,69 @@ const Navbar = () => {
               </div>
               <CartDrawer visible={visible} onClose={onClose} />
             </Item>
+            {!user && (
+              <Item
+                key="login"
+                icon={<UserOutlined />}
+                className="float-right"
+                onClick={() => {
+                  setLoginForm(true);
+                }}
+              >
+                Login/Register
+              </Item>
+            )}
+            {loginform && (
+              <>
+                <div className="modal-heads">
+                  <button
+                    className="close"
+                    onClick={() => {
+                      setLoginForm(false);
+                    }}
+                  >
+                    <CloseOutlined />
+                  </button>
+                </div>
+                <div
+                  className="modal"
+                  onClick={() => {
+                    setLoginForm(false);
+                  }}
+                >
+                  {form_state ? (
+                    <div
+                      onClick={(e) => {
+                        e.stopPropagation();
+                      }}
+                    >
+                      <FormPage />
+                    </div>
+                  ) : (
+                    <div
+                      onClick={(e) => {
+                        e.stopPropagation();
+                      }}
+                    >
+                      <RegisterPage />
+                    </div>
+                  )}
+                </div>
+              </>
+            )}
+            {user && (
+              <SubMenu
+                title={user.email && user.email.split("@")[0]} //name@gmail.com ['name', 'gmail.com']
+                icon={<SettingOutlined />}
+                className="float-right"
+              >
+                <Item key="setting:1">Option 1</Item>
+                <Item key="setting:2">Option 2</Item>
+                <Item icon={<LogoutOutlined />} onClick={logout}>
+                  Logout
+                </Item>
+              </SubMenu>
+            )}
           </Menu>
         </Col>
       </Row>

@@ -5,6 +5,7 @@ import { decrement, increment } from "../../redux/actions/actions"
 import { DeleteOutlined, ArrowLeftOutlined, ArrowRightOutlined } from '@ant-design/icons'
 import { Link } from 'react-router-dom';
 import emptyCard from '../../images/empty-cart.png'
+import { itemDeletedFromCart } from '../../redux/actions/productActions';
 
 const { Text } = Typography
 
@@ -12,14 +13,17 @@ export default function AddToCart() {
     const storageCartItem = useSelector(state => state.cartItems)
     const dispatch = useDispatch()
 
-    const productDelete = () => {
-        // if (window.confirm("Are you sure you want to delete contact?")) {
-        //     dispatch(deleteProduct(id));
-        //     toast.success("Product deleted successfully", {
-        //         icon: "😄"
-        //     });
-        //     dispatch(getProduct())
-        // }
+    const productDelete = (itemId) => {
+        const index = storageCartItem.cart_item.findIndex(({ id }) => id === itemId)
+        if (index === -1) {
+            alert("No id found")
+        }
+        else {
+            const item = storageCartItem.cart_item.splice(index, 1)
+            const updatedTotal = storageCartItem.total - (item[0].price * item[0].quantity)
+            const updatedCount = storageCartItem.cartItemCount - 1
+            dispatch(itemDeletedFromCart(storageCartItem.cart_item, updatedTotal, updatedCount))
+        }
     }
 
     const columns = [
@@ -52,7 +56,7 @@ export default function AddToCart() {
             render: (_, product) => (
                 <DeleteOutlined
                     style={{ cursor: 'pointer', color: 'red' }}
-                    onClick={() => productDelete()} />
+                    onClick={() => productDelete(product.key)} />
             ),
         },
     ];

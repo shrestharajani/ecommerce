@@ -1,5 +1,5 @@
 import { LockOutlined, UserOutlined } from "@ant-design/icons";
-import { Button, Checkbox, Form, Input, Card, Row, Col } from "antd";
+import { Button, Form, Input, Card, Row, Col } from "antd";
 import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import { toggleFrom } from "../redux/actions/actions";

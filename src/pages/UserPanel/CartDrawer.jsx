@@ -3,7 +3,7 @@ import { LeftOutlined, DeleteOutlined } from '@ant-design/icons'
 import { Link } from 'react-router-dom';
 import emptyCard from '../../images/empty-cart.png'
 import { useDispatch, useSelector } from 'react-redux';
-import { itemToCart } from '../../redux/actions/productActions';
+import { itemDeletedFromCart } from '../../redux/actions/productActions';
 
 export const CartDrawer = ({ onClose, visible }) => {
   const storageCartItem = useSelector(state => state.cartItems)
@@ -25,12 +25,18 @@ export const CartDrawer = ({ onClose, visible }) => {
     </>
   )
 
-  const deleteCartItem = (id) => {
-    const index = storageCartItem.cart_item.filter(item => item.id !== id)
-    console.log("index", index)
-    const items = storageCartItem.cart_item.slice(index, 1)
-    console.log("items", items)
-    dispatch(itemToCart(index))
+  const deleteCartItem = (itemId) => {
+    const index = storageCartItem.cart_item.findIndex(({ id }) => id === itemId)
+    if (index === -1) {
+      alert("No id found")
+    }
+    else {
+      const item = storageCartItem.cart_item.splice(index, 1)
+      console.log("items", item[0].quantity)
+      const updatedTotal = storageCartItem.total - (item[0].price * item[0].quantity)
+      const updatedCount = storageCartItem.cartItemCount - 1
+      dispatch(itemDeletedFromCart(storageCartItem.cart_item, updatedTotal, updatedCount))
+    }
   }
 
   return (
