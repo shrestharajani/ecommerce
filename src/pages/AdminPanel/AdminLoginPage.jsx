@@ -1,5 +1,5 @@
 import React from 'react'
-import { FormPage } from '../../components/LoginForm'
+import { FormPage } from '../auth/LoginForm'
 
 export const AdminLoginPage = () => {
     return (

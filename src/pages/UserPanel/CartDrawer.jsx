@@ -32,7 +32,6 @@ export const CartDrawer = ({ onClose, visible }) => {
     }
     else {
       const item = storageCartItem.cart_item.splice(index, 1)
-      console.log("items", item[0].quantity)
       const updatedTotal = storageCartItem.total - (item[0].price * item[0].quantity)
       const updatedCount = storageCartItem.cartItemCount - 1
       dispatch(itemDeletedFromCart(storageCartItem.cart_item, updatedTotal, updatedCount))

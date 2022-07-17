@@ -1,15 +1,20 @@
 import { LockOutlined, UserOutlined } from "@ant-design/icons";
 import { Button, Form, Input, Card, Row, Col } from "antd";
+import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
-import { toggleFrom } from "../redux/actions/actions";
+import { toggleFrom } from "../../redux/actions/actions";
 import GoogleSign from "./GoogleSign";
 
 export const FormPage = () => {
   const dispatch = useDispatch();
-  const onFinish = (values) => {
-    console.log("Received values of form: ", values);
-  };
+  const [stateForLogin, setStateForLogin] = useState({
+    email: "",
+    password: "",
+  });
+
+  const { email, password } = stateForLogin;
+  const handleChange = () => {};
 
   const onLogin = () => {
     console.log("Logged in successfully");
@@ -23,7 +28,6 @@ export const FormPage = () => {
         initialValues={{
           remember: true,
         }}
-        onFinish={onFinish}
       >
         <Form.Item
           name="username"
@@ -37,6 +41,8 @@ export const FormPage = () => {
           <Input
             prefix={<UserOutlined className="site-form-item-icon" />}
             placeholder="Email"
+            onChange={handleChange}
+            value={email}
           />
         </Form.Item>
         <Form.Item
@@ -52,6 +58,8 @@ export const FormPage = () => {
             prefix={<LockOutlined className="site-form-item-icon" />}
             type="password"
             placeholder="Password"
+            onChange={handleChange}
+            value={password}
           />
         </Form.Item>
         <Form.Item>

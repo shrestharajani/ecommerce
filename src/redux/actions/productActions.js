@@ -73,7 +73,6 @@ const editProductFailed = () => ({
 });
 
 export const itemToCart = (product) => {
-  console.log("product to be added ", product);
   return {
     type: ActionType.ITEM_TO_CART,
     payload: product,
@@ -81,7 +80,6 @@ export const itemToCart = (product) => {
 };
 
 export const itemDeletedFromCart = (products, total, count) => {
-  console.log("product to be deleted ", products, total, count);
   return {
     type: ActionType.ITEM_DELETE_CART,
     payload: { products, total, count },

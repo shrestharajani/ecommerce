@@ -5,15 +5,14 @@ import { ArrowLeftOutlined } from '@ant-design/icons'
 import { Steps } from 'antd';
 import CheckoutCard from './CheckoutCard';
 import { useSelector } from 'react-redux';
-import { FormPage } from '../../../components/LoginForm';
-import { RegisterPage } from '../../../components/RegisterForm';
+import { FormPage } from '../../auth/LoginForm';
+import { RegisterPage } from '../../auth/RegisterForm';
 import BillingPage from './BillingPage';
 import Payment from './Payment';
 const { Step } = Steps;
 
 export default function CheckoutPage() {
     const { form_state } = useSelector(state => state.productReducer)
-    console.log("form", form_state)
     const [current, setCurrent] = useState(0);
 
     const onChange = (value) => {

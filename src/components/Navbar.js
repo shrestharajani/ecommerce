@@ -15,8 +15,8 @@ import { signOut } from "firebase/auth";
 import logo from "../images/drinkitall.png";
 import { HomeContent } from "../pages/UserPanel/HomeContent";
 import { CartDrawer } from "../pages/UserPanel/CartDrawer";
-import { FormPage } from "./LoginForm";
-import { RegisterPage } from "./RegisterForm";
+import { FormPage } from "../pages/auth/LoginForm";
+import { RegisterPage } from "../pages/auth/RegisterForm";
 
 const { Search } = Input;
 
@@ -127,6 +127,7 @@ const Navbar = () => {
                 >
                   {form_state ? (
                     <div
+                      className="nav-login"
                       onClick={(e) => {
                         e.stopPropagation();
                       }}
@@ -135,6 +136,7 @@ const Navbar = () => {
                     </div>
                   ) : (
                     <div
+                      className="nav-login"
                       onClick={(e) => {
                         e.stopPropagation();
                       }}

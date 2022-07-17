@@ -270,6 +270,11 @@ html {
   margin-top: 3rem;
 }
 
+.nav-login {
+  max-width: 100%;
+  width: 40%;
+}
+
 .product-card:hover {
   transform: scale(1.005);
 }

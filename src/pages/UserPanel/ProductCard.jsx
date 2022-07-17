@@ -9,7 +9,6 @@ const { Meta } = Card;
 
 export default function ProductCard({ product }) {
     const { image, id, price, name, quantity, description, brand, type } = product
-    console.log("product", product)
     const dispatch = useDispatch()
     const [isModalVisible, setIsModalVisible] = useState(false);
 
