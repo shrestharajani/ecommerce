@@ -41,28 +41,21 @@ import { FeatureProducts } from "./pages/UserPanel/FeatureProducts";
 import CheckoutPage from "./pages/UserPanel/Checkout/CheckoutPage";
 import Prefooter from "./components/Prefooter";
 import CopyRightFooter from "./components/CopyRightFooter";
+import { onAuthStateChanged } from "firebase/auth";
+import { setUser } from "./redux/actions/authActions";
 
 const { Header, Content, Footer } = Layout;
 
 function App() {
   const dispatch = useDispatch();
-  //to check firebase auth state
   useEffect(() => {
-    const unsubscribe = auth.onAuthStateChanged(async (user) => {
+    onAuthStateChanged(auth, (user) => {
       if (user) {
-        const idTokenResult = await user.getIdTokenResult();
-        console.log("user", user);
-        dispatch({
-          type: "LOGGED_IN_USER",
-          payload: {
-            email: user.email,
-            token: idTokenResult.token,
-          },
-        });
+        dispatch(setUser(user));
+      } else {
+        dispatch(setUser(null));
       }
     });
-    //cleanup
-    return () => unsubscribe();
   }, [dispatch]);
 
   const location = useLocation();

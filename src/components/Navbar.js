@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { Menu, Row, Col, Input, Dropdown } from "antd";
 import {
   UserOutlined,
-  SettingOutlined,
   LogoutOutlined,
   ShoppingCartOutlined,
   DownOutlined,
@@ -10,24 +9,26 @@ import {
 } from "@ant-design/icons";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { auth } from "../firebase";
-import { signOut } from "firebase/auth";
 import logo from "../images/drinkitall.png";
 import { HomeContent } from "../pages/UserPanel/HomeContent";
 import { CartDrawer } from "../pages/UserPanel/CartDrawer";
 import { FormPage } from "../pages/auth/LoginForm";
 import { RegisterPage } from "../pages/auth/RegisterForm";
+import { loginState } from "../redux/actions/actions";
+import { logoutUser } from "../redux/actions/authActions";
+import { toast } from "react-toastify";
 
 const { Search } = Input;
 
 const { SubMenu, Item } = Menu;
 
 const Navbar = () => {
+  const { currentUser } = useSelector((state) => state.authReducer);
   const index = useSelector((state) => state.cartItems.cartItemCount);
   const { form_state } = useSelector((state) => state.productReducer);
+  const { login_state } = useSelector((state) => state.productReducer);
   const [current, setCurrent] = useState("home");
   const [visible, setVisible] = useState(false);
-  const [loginform, setLoginForm] = useState(false);
   const showDrawer = () => {
     setVisible(true);
   };
@@ -38,19 +39,19 @@ const Navbar = () => {
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { user } = useSelector((state) => ({ ...state }));
 
   const handleClick = (e) => {
     setCurrent(e.key);
   };
 
   const logout = () => {
-    signOut(auth);
-    dispatch({
-      type: "LOGOUT",
-      payload: null,
-    });
-    navigate("/login");
+    if (currentUser) {
+      toast.success("Login successfully", {
+        icon: "😄",
+      });
+      dispatch(logoutUser());
+    }
+    navigate("/");
   };
 
   const menu = (link) => (
@@ -95,25 +96,25 @@ const Navbar = () => {
               </div>
               <CartDrawer visible={visible} onClose={onClose} />
             </Item>
-            {!user && (
+            {!currentUser && (
               <Item
                 key="login"
                 icon={<UserOutlined />}
                 className="float-right"
                 onClick={() => {
-                  setLoginForm(true);
+                  dispatch(loginState(true));
                 }}
               >
                 Login/Register
               </Item>
             )}
-            {loginform && (
+            {login_state && (
               <>
                 <div className="modal-heads">
                   <button
                     className="close"
                     onClick={() => {
-                      setLoginForm(false);
+                      dispatch(loginState(false));
                     }}
                   >
                     <CloseOutlined />
@@ -122,7 +123,7 @@ const Navbar = () => {
                 <div
                   className="modal"
                   onClick={() => {
-                    setLoginForm(false);
+                    dispatch(loginState(true));
                   }}
                 >
                   {form_state ? (
@@ -147,14 +148,12 @@ const Navbar = () => {
                 </div>
               </>
             )}
-            {user && (
+            {currentUser && (
               <SubMenu
-                title={user.email && user.email.split("@")[0]} //name@gmail.com ['name', 'gmail.com']
-                icon={<SettingOutlined />}
+                title={currentUser.email && currentUser.email.split("@")[0]}
+                icon={<UserOutlined />}
                 className="float-right"
               >
-                <Item key="setting:1">Option 1</Item>
-                <Item key="setting:2">Option 2</Item>
                 <Item icon={<LogoutOutlined />} onClick={logout}>
                   Logout
                 </Item>

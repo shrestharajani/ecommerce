@@ -1,23 +1,48 @@
 import { LockOutlined, UserOutlined } from "@ant-design/icons";
 import { Button, Form, Input, Card, Row, Col } from "antd";
-import { useState } from "react";
-import { useDispatch } from "react-redux";
-import { Link } from "react-router-dom";
-import { toggleFrom } from "../../redux/actions/actions";
+import { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
+import { loginState, toggleFrom } from "../../redux/actions/actions";
+import { loginUser } from "../../redux/actions/authActions";
 import GoogleSign from "./GoogleSign";
 
 export const FormPage = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const location = useLocation();
+  const pathSnippets = location.pathname.split("/").filter((i) => i);
   const [stateForLogin, setStateForLogin] = useState({
     email: "",
     password: "",
   });
+  const { currentUser } = useSelector((state) => state.authReducer);
+  useEffect(() => {
+    if (currentUser) {
+      navigate("/");
+    }
+  }, [currentUser, navigate]);
 
   const { email, password } = stateForLogin;
-  const handleChange = () => {};
 
-  const onLogin = () => {
-    console.log("Logged in successfully");
+  const handleChange = (e) => {
+    let { name, value } = e.target;
+    setStateForLogin({ ...stateForLogin, [name]: value });
+  };
+
+  const onLogin = (e) => {
+    e.preventDefault();
+    console.log("Current User", currentUser);
+    if (!email || !password) {
+      alert("Fields cannot be empty");
+    } else {
+      toast.success("Login successfully", {
+        icon: "😄",
+      });
+      dispatch(loginUser(email, password));
+      dispatch(loginState(false));
+    }
   };
 
   return (
@@ -30,15 +55,17 @@ export const FormPage = () => {
         }}
       >
         <Form.Item
-          name="username"
+          name="email"
           rules={[
             {
+              type: "email",
               required: true,
               message: "Please input your email!",
             },
           ]}
         >
           <Input
+            name="email"
             prefix={<UserOutlined className="site-form-item-icon" />}
             placeholder="Email"
             onChange={handleChange}
@@ -55,6 +82,7 @@ export const FormPage = () => {
           ]}
         >
           <Input.Password
+            name="password"
             prefix={<LockOutlined className="site-form-item-icon" />}
             type="password"
             placeholder="Password"
@@ -69,7 +97,7 @@ export const FormPage = () => {
             className="login-form-button buttons"
             onClick={onLogin}
           >
-            <Link to="/admin/admin-page">Log in</Link>
+            Log in
           </Button>
 
           <Row justify="space-between">

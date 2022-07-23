@@ -1,14 +1,15 @@
 import { LockOutlined, MailOutlined, UserOutlined } from "@ant-design/icons";
 import { Button, Form, Input, Card, DatePicker } from "antd";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link } from "react-router-dom";
-import { toggleFrom } from "../../redux/actions/actions";
+import { Link, useNavigate } from "react-router-dom";
+import { loginState, toggleFrom } from "../../redux/actions/actions";
 import { registerUser } from "../../redux/actions/authActions";
-import GoogleSign from "./GoogleSign";
+import { toast } from "react-toastify";
 
 export const RegisterPage = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const [stateForRegister, setStateForRegister] = useState({
     displayName: "",
     email: "",
@@ -18,7 +19,11 @@ export const RegisterPage = () => {
   });
 
   const { currentUser } = useSelector((state) => state.authReducer);
-  console.log("currentUser", currentUser);
+  useEffect(() => {
+    if (currentUser) {
+      navigate("/");
+    }
+  }, [currentUser, navigate]);
 
   const { displayName, email, password, repassword, dob } = stateForRegister;
 
@@ -49,7 +54,11 @@ export const RegisterPage = () => {
     } else if (verifyAge < 21) {
       alert("You are not eligible to use this website");
     } else {
+      toast.success("User registered successfully", {
+        icon: "😄",
+      });
       dispatch(registerUser(email, password, displayName));
+      dispatch(loginState(false));
     }
   };
 
@@ -178,7 +187,6 @@ export const RegisterPage = () => {
           </Link>
         </Form.Item>
       </Form>
-      <GoogleSign />
     </Card>
   );
 };

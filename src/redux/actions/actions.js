@@ -26,3 +26,10 @@ export const toggleFrom = () => {
     type: ActionType.TOGGLEFORM,
   };
 };
+
+export const loginState = (state) => {
+  return {
+    type: ActionType.LOGIN_STATE,
+    payload: state,
+  };
+};

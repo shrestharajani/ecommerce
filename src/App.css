@@ -13,6 +13,19 @@ html {
   z-index: 2;
 }
 
+.filter-product{
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.filter-product input{
+  width: 10rem;
+  border-left: none;
+  border-right: none;
+  border-top: none;
+}
+
 .header {
   background-color: white !important;
   padding: 0 12rem !important;

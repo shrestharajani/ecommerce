@@ -1,10 +1,6 @@
-import React from 'react'
-import { DisplayProductByBrand } from '../DisplayProductByBrand'
+import React from "react";
+import { DisplayProductByBrand } from "../DisplayProductByBrand";
 
 export const Beer = () => {
-    return (
-        <DisplayProductByBrand
-            title="Beers"
-            brand="beer" />
-    )
-}
+  return <DisplayProductByBrand title="Beers" brand="beer" />;
+};

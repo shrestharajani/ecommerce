@@ -7,6 +7,7 @@ const initialState = {
   error: null,
   index: 1,
   form_state: true,
+  login_state: null,
 };
 
 export const productReducer = (state = initialState, actions) => {
@@ -46,6 +47,12 @@ export const productReducer = (state = initialState, actions) => {
       return {
         ...state,
         form_state: !state.form_state,
+      };
+
+    case ActionType.LOGIN_STATE:
+      return {
+        ...state,
+        login_state: actions.payload,
       };
 
     case ActionType.GET_PRODUCT:
