@@ -44,6 +44,19 @@ export const FormPage = () => {
       dispatch(loginState(false));
     }
   };
+
+const onLoginAdmin = (e) => {
+    e.preventDefault();
+    if (!email || !password) {
+      alert("Fields cannot be empty");
+    } else {
+      toast.success("Login successfully", {
+        icon: "😄",
+      });
+      navigate("/admin/admin-page");
+    }
+  };
+
 if (pathSnippets[0] === "admin") {
     return (
 <Card className="login-card">
@@ -95,11 +108,14 @@ if (pathSnippets[0] === "admin") {
             type="primary"
             htmlType="submit"
             className="login-form-button buttons"
-            onClick={onLogin}
+            onClick={onLoginAdmin}
           >
             Log in
           </Button>
-
+</Form.Item>
+      </Form>
+      <GoogleSign />
+    </Card>
 )}
 
   return (
