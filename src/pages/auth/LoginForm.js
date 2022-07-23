@@ -46,6 +46,59 @@ export const FormPage = () => {
   };
 if (pathSnippets[0] === "admin") {
     return (
+<Card className="login-card">
+      <h1 style={{ color: "coral" }}>Login</h1>
+      <Form
+        name="normal_login"
+        initialValues={{
+          remember: true,
+        }}
+      >
+        <Form.Item
+          name="email"
+          rules={[
+            {
+              type: "email",
+              required: true,
+              message: "Please input your email!",
+            },
+          ]}
+        >
+          <Input
+            name="email"
+            prefix={<UserOutlined className="site-form-item-icon" />}
+            placeholder="Email"
+            onChange={handleChange}
+            value={email}
+          />
+        </Form.Item>
+        <Form.Item
+          name="password"
+          rules={[
+            {
+              required: true,
+              message: "Please input your Password!",
+            },
+          ]}
+        >
+          <Input.Password
+            name="password"
+            prefix={<LockOutlined className="site-form-item-icon" />}
+            type="password"
+            placeholder="Password"
+            onChange={handleChange}
+            value={password}
+          />
+        </Form.Item>
+        <Form.Item>
+          <Button
+            type="primary"
+            htmlType="submit"
+            className="login-form-button buttons"
+            onClick={onLogin}
+          >
+            Log in
+          </Button>
 
 )}
 
