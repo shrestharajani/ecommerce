@@ -44,6 +44,10 @@ export const FormPage = () => {
       dispatch(loginState(false));
     }
   };
+if (pathSnippets[0] === "admin") {
+    return (
+
+)}
 
   return (
     <Card className="login-card">
