@@ -8,9 +8,6 @@ import { auth } from "./firebase";
 import { useDispatch } from "react-redux";
 import Navbar from "./components/Navbar";
 import Home from "./pages/UserPanel/Home";
-import Login from "./pages/auth/Login";
-import Register from "./pages/auth/Register";
-import RegisterComplete from "./pages/auth/RegisterComplete";
 import { Link } from "react-router-dom";
 import { Layout, Breadcrumb } from "antd";
 import FooterPage from "./components/FooterPage";
@@ -101,13 +98,6 @@ function App() {
           <Breadcrumb className="ant-breadcrumb">{breadcrumbItems}</Breadcrumb>
           <Routes>
             <Route exact path="/" element={<Home />}></Route>
-            <Route exact path="/login" element={<Login />}></Route>
-            <Route exact path="/register" element={<Register />}></Route>
-            <Route
-              exact
-              path="/register/complete"
-              element={<RegisterComplete />}
-            ></Route>
             <Route
               exact
               path="/forgot/password"

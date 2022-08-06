@@ -33,7 +33,6 @@ export const FormPage = () => {
 
   const onLogin = (e) => {
     e.preventDefault();
-    console.log("Current User", currentUser);
     if (!email || !password) {
       alert("Fields cannot be empty");
     } else {
@@ -47,9 +46,12 @@ export const FormPage = () => {
 
 const onLoginAdmin = (e) => {
     e.preventDefault();
-    if (!email || !password) {
+    if (!email || !password) { 
       alert("Fields cannot be empty");
     } else {
+      if(email === currentUser.email){
+        alert("hello")
+      }
       toast.success("Login successfully", {
         icon: "😄",
       });
@@ -59,8 +61,8 @@ const onLoginAdmin = (e) => {
 
 if (pathSnippets[0] === "admin") {
     return (
-<Card className="login-card">
-      <h1 style={{ color: "coral" }}>Login</h1>
+      <Card className="login-card">
+      <h1 style={{ color: "coral" }}>Admin Login</h1>
       <Form
         name="normal_login"
         initialValues={{
@@ -112,9 +114,8 @@ if (pathSnippets[0] === "admin") {
           >
             Log in
           </Button>
-</Form.Item>
+      </Form.Item>
       </Form>
-      <GoogleSign />
     </Card>
 )}
 

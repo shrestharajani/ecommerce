@@ -123,7 +123,7 @@ const Navbar = () => {
                 <div
                   className="modal"
                   onClick={() => {
-                    dispatch(loginState(true));
+                    dispatch(loginState(false));
                   }}
                 >
                   {form_state ? (
