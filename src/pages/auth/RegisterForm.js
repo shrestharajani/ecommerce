@@ -57,7 +57,7 @@ export const RegisterPage = () => {
       toast.success("User registered successfully", {
         icon: "😄",
       });
-      dispatch(registerUser(email, password, displayName));
+      dispatch(registerUser(email, password));
       dispatch(loginState(false));
     }
   };

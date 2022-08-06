@@ -12,7 +12,6 @@ import Payment from "./Payment";
 const { Step } = Steps;
 
 export default function CheckoutPage() {
-  const { form_state } = useSelector((state) => state.productReducer);
   const [current, setCurrent] = useState(0);
 
   const onChange = (value) => {

@@ -20,47 +20,49 @@ export const DisplayProductByBrand = ({ brand, title }) => {
       <h2 style={{ marginTop: "3rem" }}>{title}</h2>
       <Row gutter={20}>
         <Col span={6}>
-          <Card title="Filter Product">
-            <div className="filter-product">
-              <Input
-                type="number"
-                placeholder="min-price"
-                onChange={(e) => {
-                  setminPrice(e.target.value);
+          <div style={{ top: "150px", position: "sticky" }}>
+            <Card title="Filter Product">
+              <div className="filter-product">
+                <Input
+                  type="number"
+                  placeholder="min-price"
+                  onChange={(e) => {
+                    setminPrice(e.target.value);
+                  }}
+                  value={minPrice}
+                />
+                <Input
+                  type="number"
+                  placeholder="max-price"
+                  onChange={(e) => {
+                    setmaxPrice(e.target.value);
+                  }}
+                  value={maxPrice}
+                />
+              </div>
+              <Button
+                block
+                type="submit"
+                onClick={() => {
+                  setFilterValue(true);
                 }}
-                value={minPrice}
-              />
-              <Input
-                type="number"
-                placeholder="max-price"
-                onChange={(e) => {
-                  setmaxPrice(e.target.value);
+                style={{
+                  borderColor: "coral",
+                  backgroundColor: "coral",
+                  color: "white",
                 }}
-                value={maxPrice}
-              />
-            </div>
-            <Button
-              block
-              type="submit"
-              onClick={() => {
-                setFilterValue(true);
-              }}
-              style={{
-                borderColor: "coral",
-                backgroundColor: "coral",
-                color: "white",
-              }}
-            >
-              Filter Products
-            </Button>
-          </Card>
+              >
+                Filter Products
+              </Button>
+            </Card>
+          </div>
         </Col>
         <Col span={18}>
           <Row gutter={[16, 24]}>
             {filterValue
               ? product_details
                   .filter((item) => item.brand === `${brand}`)
-                  .slice(minPrice, maxPrice)
+
                   .map((product) => (
                     <Col xs={24} sm={12} md={8} lg={8} key={product.id}>
                       <ProductCard key={product.id} product={product} />

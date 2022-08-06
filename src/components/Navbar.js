@@ -1,11 +1,12 @@
 import React, { useState } from "react";
-import { Menu, Row, Col, Input, Dropdown } from "antd";
+import { Menu, Row, Col, Input, Dropdown,Avatar } from "antd";
 import {
   UserOutlined,
   LogoutOutlined,
   ShoppingCartOutlined,
   DownOutlined,
   CloseOutlined,
+  HistoryOutlined
 } from "@ant-design/icons";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
@@ -46,7 +47,7 @@ const Navbar = () => {
 
   const logout = () => {
     if (currentUser) {
-      toast.success("Login successfully", {
+      toast.success("Logout successfully", {
         icon: "😄",
       });
       dispatch(logoutUser());
@@ -80,7 +81,7 @@ const Navbar = () => {
           <Search placeholder="Search Products" allowClear size="large" />
         </Col>
 
-        <Col xs={5}>
+        <Col xs={8}>
           <Menu onClick={handleClick} mode="horizontal">
             <Item key="add-to-cart">
               <div className="add-cart" onClick={showDrawer}>
@@ -96,6 +97,7 @@ const Navbar = () => {
               </div>
               <CartDrawer visible={visible} onClose={onClose} />
             </Item>
+            {currentUser && <Item key="hhistory" icon={<HistoryOutlined />}>Your History</Item>}
             {!currentUser && (
               <Item
                 key="login"
@@ -151,7 +153,7 @@ const Navbar = () => {
             {currentUser && (
               <SubMenu
                 title={currentUser.email && currentUser.email.split("@")[0]}
-                icon={<UserOutlined />}
+                icon={<Avatar src="https://joeschmoe.io/api/v1/random" />}
                 className="float-right"
               >
                 <Item icon={<LogoutOutlined />} onClick={logout}>

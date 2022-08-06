@@ -4,6 +4,7 @@ import { Link, useNavigate } from "react-router-dom";
 import emptyCard from "../../images/empty-cart.png";
 import { useDispatch, useSelector } from "react-redux";
 import { itemDeletedFromCart } from "../../redux/actions/productActions";
+import { loginState } from "../../redux/actions/actions";
 
 export const CartDrawer = ({ onClose, visible }) => {
   const storageCartItem = useSelector((state) => state.cartItems);
@@ -12,6 +13,8 @@ export const CartDrawer = ({ onClose, visible }) => {
   const navigate = useNavigate();
 
   const checkoutPage = () => {
+    onClose(false);
+    currentUser ? navigate("/checkout") : dispatch(loginState(true));
     navigate("/checkout");
   };
 

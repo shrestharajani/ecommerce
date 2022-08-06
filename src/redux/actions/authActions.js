@@ -15,6 +15,11 @@ const registerSuccess = (user) => ({
   payload: user,
 });
 
+const adminRegisterSuccess = (user) => ({
+  type: ActionType.ADMIN_REGISTER_SUCCESS,
+  payload: user,
+});
+
 const registerFail = (error) => ({
   type: ActionType.REGISTER_FAIL,
   payload: error,
@@ -53,13 +58,22 @@ export const setUser = (user) => ({
 });
 
 export const registerUser =
-  (email, password, displayName) => async (dispatch) => {
+  (email, password) => async (dispatch) => {
     dispatch(registerStart());
     createUserWithEmailAndPassword(auth, email, password)
       .then(({ user }) => {
-        user.displayName = displayName;
         dispatch(registerSuccess(user));
       })
+      .catch((error) => dispatch(registerFail(error.message)));
+  };
+
+export const registerAdminUser =
+  (email, password) => async (dispatch) => {
+    dispatch(registerStart());
+    signInWithEmailAndPassword(auth, email, password)
+    .then(({ user }) => {
+      dispatch(adminRegisterSuccess(user));
+    })
       .catch((error) => dispatch(registerFail(error.message)));
   };
 

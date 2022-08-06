@@ -5,7 +5,7 @@ const initialState = {
   single_product: {},
   loading: false,
   error: null,
-  index: 1,
+  index: 0,
   form_state: true,
   login_state: null,
 };

@@ -3,6 +3,7 @@ import { ActionType } from "../actions/ActionType";
 const initialState = {
   loading: false,
   currentUser: null,
+  adminUser:null,
   error: null,
 };
 
@@ -28,6 +29,15 @@ export const authReducer = (state = initialState, action) => {
         ...state,
         loading: false,
         currentUser: action.payload,
+        adminUser:null
+      };
+
+    case ActionType.ADMIN_REGISTER_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        adminUser: action.payload,
+        currentUser:null
       };
 
     case ActionType.SET_USER:
