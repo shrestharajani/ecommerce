@@ -8,6 +8,7 @@ const initialState = {
   index: 0,
   form_state: true,
   login_state: null,
+  search_value:null
 };
 
 export const productReducer = (state = initialState, actions) => {
@@ -41,6 +42,12 @@ export const productReducer = (state = initialState, actions) => {
       return {
         ...state,
         index: id,
+      };
+
+    case ActionType.SEARCH_ITEM:
+      return {
+        ...state,
+        search_value: actions.payload,
       };
 
     case ActionType.TOGGLEFORM:

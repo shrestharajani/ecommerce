@@ -33,3 +33,10 @@ export const loginState = (state) => {
     payload: state,
   };
 };
+
+export const searchProduct = (value) => {
+  return {
+    type: ActionType.SEARCH_ITEM,
+    payload: value,
+  };
+};

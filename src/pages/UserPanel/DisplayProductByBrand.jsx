@@ -5,7 +5,9 @@ import { getProduct } from "../../redux/actions/productActions";
 import ProductCard from "./ProductCard";
 
 export const DisplayProductByBrand = ({ brand, title }) => {
-  const { product_details } = useSelector((state) => state.productReducer);
+  const { product_details, search_value } = useSelector(
+    (state) => state.productReducer
+  );
   const dispatch = useDispatch();
 
   const [minPrice, setminPrice] = useState();
@@ -70,6 +72,12 @@ export const DisplayProductByBrand = ({ brand, title }) => {
                   ))
               : product_details
                   .filter((item) => item.brand === `${brand}`)
+                  .filter(
+                    (item) =>
+                      item.name.toLowerCase().includes(search_value) ||
+                      item.brand.toLowerCase().includes(search_value) ||
+                      item.type.toLowerCase().includes(search_value)
+                  )
                   .map((product) => (
                     <Col xs={24} sm={12} md={8} lg={8} key={product.id}>
                       <ProductCard key={product.id} product={product} />

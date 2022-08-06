@@ -3,7 +3,6 @@ import React, { useState } from "react";
 import ProductTable from "./ProductTable";
 import { Input, Button, Modal } from "antd";
 import { AddEditProductDetail } from "./AddEditProductDetail";
-import { useSelector } from "react-redux";
 const { Search } = Input;
 
 export const AdminProduct = () => {
@@ -21,10 +20,6 @@ export const AdminProduct = () => {
     showForm ? setShowForm(false) : setShowForm(true);
   };
 
-  const onSearch = (value) => {
-    setSearchItem(value);
-  };
-
   return (
     <>
       <Row justify="space-between">
@@ -32,7 +27,9 @@ export const AdminProduct = () => {
           <Search
             placeholder="input search text"
             allowClear
-            onSearch={onSearch}
+            onSearch={(value) => {
+              setSearchItem(value);
+            }}
             size="large"
           />
         </Col>

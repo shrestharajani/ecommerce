@@ -1,12 +1,12 @@
 import React, { useState } from "react";
-import { Menu, Row, Col, Input, Dropdown,Avatar } from "antd";
+import { Menu, Row, Col, Input, Dropdown, Avatar } from "antd";
 import {
   UserOutlined,
   LogoutOutlined,
   ShoppingCartOutlined,
   DownOutlined,
   CloseOutlined,
-  HistoryOutlined
+  HistoryOutlined,
 } from "@ant-design/icons";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
@@ -15,7 +15,7 @@ import { HomeContent } from "../pages/UserPanel/HomeContent";
 import { CartDrawer } from "../pages/UserPanel/CartDrawer";
 import { FormPage } from "../pages/auth/LoginForm";
 import { RegisterPage } from "../pages/auth/RegisterForm";
-import { loginState } from "../redux/actions/actions";
+import { loginState, searchProduct } from "../redux/actions/actions";
 import { logoutUser } from "../redux/actions/authActions";
 import { toast } from "react-toastify";
 
@@ -78,7 +78,14 @@ const Navbar = () => {
         </Col>
 
         <Col xs={8}>
-          <Search placeholder="Search Products" allowClear size="large" />
+          <Search
+            placeholder="Search Products"
+            allowClear
+            size="large"
+            onSearch={(value) => {
+              dispatch(searchProduct(value));
+            }}
+          />
         </Col>
 
         <Col xs={8}>
@@ -97,7 +104,11 @@ const Navbar = () => {
               </div>
               <CartDrawer visible={visible} onClose={onClose} />
             </Item>
-            {currentUser && <Item key="hhistory" icon={<HistoryOutlined />}>Your History</Item>}
+            {currentUser && (
+              <Item key="hhistory" icon={<HistoryOutlined />}>
+                Your History
+              </Item>
+            )}
             {!currentUser && (
               <Item
                 key="login"

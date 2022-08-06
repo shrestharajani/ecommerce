@@ -99,7 +99,6 @@ const ProductTable = ({
     .filter(
       (item) =>
         item.name.toLowerCase().includes(searchItem) ||
-        item.description.toLowerCase().includes(searchItem) ||
         item.brand.toLowerCase().includes(searchItem) ||
         item.type.toLowerCase().includes(searchItem)
     )
