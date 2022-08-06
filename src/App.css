@@ -629,8 +629,7 @@ img.app-img {
 
 .image {
   border: 1px solid #ccc;
-  height: 12vh;
-  width: 14vw;
+  width: 5vw;
   display: flex;
   align-items: center;
   justify-content: center;

@@ -8,7 +8,7 @@ const initialState = {
   index: 0,
   form_state: true,
   login_state: null,
-  search_value:null
+  search_value: "",
 };
 
 export const productReducer = (state = initialState, actions) => {

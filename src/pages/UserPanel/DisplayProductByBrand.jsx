@@ -71,13 +71,13 @@ export const DisplayProductByBrand = ({ brand, title }) => {
                     </Col>
                   ))
               : product_details
-                  .filter((item) => item.brand === `${brand}`)
                   .filter(
                     (item) =>
                       item.name.toLowerCase().includes(search_value) ||
                       item.brand.toLowerCase().includes(search_value) ||
                       item.type.toLowerCase().includes(search_value)
                   )
+                  .filter((item) => item.brand === `${brand}`)
                   .map((product) => (
                     <Col xs={24} sm={12} md={8} lg={8} key={product.id}>
                       <ProductCard key={product.id} product={product} />
