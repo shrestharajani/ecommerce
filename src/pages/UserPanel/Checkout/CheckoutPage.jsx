@@ -1,4 +1,4 @@
-import { Button, Col, Row } from "antd";
+import { Col, Row } from "antd";
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { ArrowLeftOutlined } from "@ant-design/icons";
@@ -57,15 +57,6 @@ export default function CheckoutPage() {
             </Link>
           </div>
         </div>
-        <Button
-          style={{
-            color: "white",
-            backgroundColor: "coral",
-            borderColor: "coral",
-          }}
-        >
-          Place Order
-        </Button>
       </Row>
     </>
   );

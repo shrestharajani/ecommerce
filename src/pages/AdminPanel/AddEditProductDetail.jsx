@@ -2,13 +2,14 @@ import { Input, Select, Button, Row, Spin } from "antd";
 import { CloudUploadOutlined, DeleteOutlined } from "@ant-design/icons";
 import { useState, useEffect } from "react";
 import "react-toastify/dist/ReactToastify.css";
+import { toast } from "react-toastify";
 import { useDispatch, useSelector } from "react-redux";
 import {
   addProduct,
   editProduct,
   getProduct,
 } from "../../redux/actions/productActions";
-import { toast } from "react-toastify";
+
 import {
   ref,
   uploadBytesResumable,

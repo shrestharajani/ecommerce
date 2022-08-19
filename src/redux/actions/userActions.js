@@ -3,28 +3,53 @@ import { firestore_db } from "../../firebase";
 import { doc, getDocs, collection, setDoc } from "firebase/firestore";
 
 const getUserStart = () => ({
-  type: ActionType.GET_PRODUCT,
+  type: ActionType.GET_USER,
 });
 
-const getUserSuccess = (products) => ({
-  type: ActionType.GET_PRODUCT_SUCCESS,
-  payload: products,
+const getUserSuccess = (userorders) => ({
+  type: ActionType.GET_USER_SUCCESS,
+  payload: userorders,
 });
 
 const getUserFailed = () => ({
-  type: ActionType.GET_PRODUCT_FAIL,
+  type: ActionType.GET_USER_FAIL,
 });
 
 const addUserStart = () => ({
-  type: ActionType.ADD_PRODUCT,
+  type: ActionType.ADD_USER,
 });
 
 const addUserSuccess = () => ({
-  type: ActionType.ADD_PRODUCT_SUCCESS,
+  type: ActionType.ADD_USER_SUCCESS,
 });
 
 const addUserFailed = () => ({
-  type: ActionType.ADD_PRODUCT_FAIL,
+  type: ActionType.ADD_USER_FAIL,
+});
+
+const addHistoryStart = () => ({
+  type: ActionType.ADD_HISTORY_START,
+});
+
+const addHistorySuccess = () => ({
+  type: ActionType.ADD_PURCHASE_HISTORY,
+});
+
+const addHistoryFailed = () => ({
+  type: ActionType.ADD_HISTORY_FAIL,
+});
+
+const getOrderStart = () => ({
+  type: ActionType.GET_HISTORY_START,
+});
+
+const getOrderSuccess = (order) => ({
+  type: ActionType.GET_PURCHASE_HISTORY,
+  payload: order,
+});
+
+const getOrderFailed = () => ({
+  type: ActionType.GET_HISTORY_FAIL,
 });
 
 export const getUser = () => async (dispatch) => {
@@ -43,7 +68,6 @@ export const getUser = () => async (dispatch) => {
 };
 
 export const addUser = (userOrder) => async (dispatch) => {
-  console.log("order", userOrder);
   dispatch(addUserStart());
 
   const addUserOrder = await setDoc(
@@ -55,5 +79,35 @@ export const addUser = (userOrder) => async (dispatch) => {
     dispatch(addUserSuccess(addUserOrder));
   } catch (error) {
     dispatch(addUserFailed(error));
+  }
+};
+
+export const addOrder = (history) => async (dispatch) => {
+  dispatch(addHistoryStart());
+
+  const addhistory = await setDoc(
+    doc(firestore_db, "Order History", `${Date.now()}`),
+    history,
+    { merge: true }
+  );
+  try {
+    dispatch(addHistorySuccess(addhistory));
+  } catch (error) {
+    dispatch(addHistoryFailed(error));
+  }
+};
+
+export const getOrder = () => async (dispatch) => {
+  dispatch(getOrderStart());
+
+  const getOrder = await getDocs(collection(firestore_db, "Order History"));
+  const order = [];
+  getOrder.forEach((doc) => {
+    order.push({ ...doc.data(), id: doc.id });
+  });
+  try {
+    dispatch(getOrderSuccess(order));
+  } catch (error) {
+    dispatch(getOrderFailed(error));
   }
 };

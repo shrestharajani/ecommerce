@@ -13,6 +13,7 @@ import { addUser } from "../../../redux/actions/userActions";
 export default function BillingPage({ setCurrent }) {
   const dispatch = useDispatch();
   const [state, setState] = useState({
+    id: Date.now(),
     first_name: "",
     last_name: "",
     phone_number: "",

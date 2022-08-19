@@ -9,7 +9,6 @@ const initialState = {
   form_state: true,
   login_state: null,
   search_value: "",
-  history_item: [],
 };
 
 export const productReducer = (state = initialState, actions) => {

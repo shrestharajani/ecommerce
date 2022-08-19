@@ -40,3 +40,10 @@ export const searchProduct = (value) => {
     payload: value,
   };
 };
+
+// export const productHistory = (products) => {
+//   return {
+//     type: ActionType.ADD_PURCHASE_HISTORY,
+//     payload: products,
+//   };
+// };
