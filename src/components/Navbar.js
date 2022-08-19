@@ -105,8 +105,8 @@ const Navbar = () => {
               <CartDrawer visible={visible} onClose={onClose} />
             </Item>
             {currentUser && (
-              <Item key="hhistory" icon={<HistoryOutlined />}>
-                Your History
+              <Item key="history" icon={<HistoryOutlined />}>
+                <Link to="/history">Your History</Link>
               </Item>
             )}
             {!currentUser && (

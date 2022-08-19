@@ -24,4 +24,5 @@ export const breadcrumbNameMap = {
   "/wine/imported-wine": "Imported Wine",
   "/kodo": "Kodo",
   "/checkout": "Checkout",
+  "/history": "Your History",
 };

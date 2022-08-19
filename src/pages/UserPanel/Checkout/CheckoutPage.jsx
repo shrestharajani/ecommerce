@@ -4,9 +4,6 @@ import { Link } from "react-router-dom";
 import { ArrowLeftOutlined } from "@ant-design/icons";
 import { Steps } from "antd";
 import CheckoutCard from "./CheckoutCard";
-import { useSelector } from "react-redux";
-import { FormPage } from "../../auth/LoginForm";
-import { RegisterPage } from "../../auth/RegisterForm";
 import BillingPage from "./BillingPage";
 import Payment from "./Payment";
 const { Step } = Steps;
@@ -21,7 +18,7 @@ export default function CheckoutPage() {
     {
       id: 1,
       title: "Billing",
-      content: <BillingPage />,
+      content: <BillingPage setCurrent={setCurrent} />,
     },
     {
       id: 2,

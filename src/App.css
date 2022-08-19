@@ -283,6 +283,11 @@ html {
   margin-top: 3rem;
 }
 
+.history{
+  display: flex;
+  justify-content: center;
+}
+
 .nav-login {
   max-width: 100%;
   width: 40%;

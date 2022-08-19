@@ -35,6 +35,7 @@ import { VodkaDomestic } from "./pages/UserPanel/Vodka/VodkaDomestic";
 import { VodkaImported } from "./pages/UserPanel/Vodka/VodkaImported";
 import { Kodo } from "./pages/UserPanel/Kodo";
 import { FeatureProducts } from "./pages/UserPanel/FeatureProducts";
+import History from "./pages/UserPanel/History";
 import CheckoutPage from "./pages/UserPanel/Checkout/CheckoutPage";
 import Prefooter from "./components/Prefooter";
 import CopyRightFooter from "./components/CopyRightFooter";
@@ -137,6 +138,7 @@ function App() {
             />
             <Route path="/kodo" element={<Kodo />} />
             <Route path="/checkout" element={<CheckoutPage />} />
+            <Route path="/history" element={<History />} />
           </Routes>
         </Content>
 
