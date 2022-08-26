@@ -1,8 +1,9 @@
 import { ActionType } from "./ActionType";
-import { auth } from "../../firebase";
+import { auth, googleAuthProvider } from "../../firebase";
 import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
+  signInWithPopup,
   signOut,
 } from "firebase/auth";
 
@@ -52,30 +53,42 @@ const logoutFail = (error) => ({
   payload: error,
 });
 
+const googleLoginStart = () => ({
+  type: ActionType.GOOGLE_LOGIN_START,
+});
+
+const googleLoginSuccess = (user) => ({
+  type: ActionType.GOOGLE_LOGIN_SUCCESS,
+  payload: user,
+});
+
+const googleLoginFail = (error) => ({
+  type: ActionType.GOOGLE_LOGIN_FAIL,
+  payload: error,
+});
+
 export const setUser = (user) => ({
   type: ActionType.SET_USER,
   payload: user,
 });
 
-export const registerUser =
-  (email, password) => async (dispatch) => {
-    dispatch(registerStart());
-    createUserWithEmailAndPassword(auth, email, password)
-      .then(({ user }) => {
-        dispatch(registerSuccess(user));
-      })
-      .catch((error) => dispatch(registerFail(error.message)));
-  };
+export const registerUser = (email, password) => async (dispatch) => {
+  dispatch(registerStart());
+  createUserWithEmailAndPassword(auth, email, password)
+    .then(({ user }) => {
+      dispatch(registerSuccess(user));
+    })
+    .catch((error) => dispatch(registerFail(error.message)));
+};
 
-export const registerAdminUser =
-  (email, password) => async (dispatch) => {
-    dispatch(registerStart());
-    signInWithEmailAndPassword(auth, email, password)
+export const registerAdminUser = (email, password) => async (dispatch) => {
+  dispatch(registerStart());
+  signInWithEmailAndPassword(auth, email, password)
     .then(({ user }) => {
       dispatch(adminRegisterSuccess(user));
     })
-      .catch((error) => dispatch(registerFail(error.message)));
-  };
+    .catch((error) => dispatch(registerFail(error.message)));
+};
 
 export const loginUser = (email, password) => async (dispatch) => {
   dispatch(loginStart());
@@ -93,4 +106,13 @@ export const logoutUser = () => async (dispatch) => {
       dispatch(logoutSuccess());
     })
     .catch((error) => dispatch(logoutFail(error.message)));
+};
+
+export const googleLoginUser = () => async (dispatch) => {
+  dispatch(googleLoginStart());
+  signInWithPopup(auth, googleAuthProvider)
+    .then(({ user }) => {
+      dispatch(googleLoginSuccess(user));
+    })
+    .catch((error) => dispatch(googleLoginFail(error.message)));
 };

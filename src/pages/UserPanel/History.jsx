@@ -1,17 +1,29 @@
 import React, { useEffect } from "react";
 import history from "../../images/download.png";
 import { useSelector, useDispatch } from "react-redux";
-import { getOrder } from "../../redux/actions/userActions";
+import { deleteHistory, getOrder } from "../../redux/actions/userActions";
 import { Card, Col, Row } from "antd";
+import { DeleteOutlined } from "@ant-design/icons";
+import "react-toastify/dist/ReactToastify.css";
+import { toast } from "react-toastify";
 
 export default function History() {
   const historyItem = useSelector((state) => state.userReducer.order_details);
-  console.log("history", historyItem);
 
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getOrder());
   }, [dispatch]);
+
+  const historyDelete = (id) => {
+    if (window.confirm("Are you sure you want to delete contact?")) {
+      dispatch(deleteHistory(id));
+      toast.success("Product deleted successfully", {
+        icon: "😄",
+      });
+    }
+    dispatch(getOrder());
+  };
 
   return (
     <div>
@@ -26,8 +38,20 @@ export default function History() {
         </div>
       )}
       {historyItem.map((item, index) => (
-        <Card title={item.date} key={{ index }}>
+        <Card
+          title={
+            <div style={{ display: "flex", justifyContent: "space-between" }}>
+              {item.date}{" "}
+              <DeleteOutlined
+                style={{ cursor: "pointer", color: "red" }}
+                onClick={() => historyDelete(item.id)}
+              />
+            </div>
+          }
+          key={{ index }}
+        >
           <h5>{item.storageCartItem.cart_item.length} items</h5>
+
           {item.storageCartItem.cart_item.map((item, index) => (
             <Card key={index} bordered={false}>
               <Row justify="space-between">

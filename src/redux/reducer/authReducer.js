@@ -3,7 +3,7 @@ import { ActionType } from "../actions/ActionType";
 const initialState = {
   loading: false,
   currentUser: null,
-  adminUser:null,
+  adminUser: null,
   error: null,
 };
 
@@ -12,6 +12,7 @@ export const authReducer = (state = initialState, action) => {
     case ActionType.REGISTER_START:
     case ActionType.LOGIN_START:
     case ActionType.LOGOUT_START:
+    case ActionType.GOOGLE_LOGIN_START:
       return {
         ...state,
         loading: true,
@@ -25,11 +26,12 @@ export const authReducer = (state = initialState, action) => {
 
     case ActionType.REGISTER_SUCCESS:
     case ActionType.LOGIN_SUCCESS:
+    case ActionType.GOOGLE_LOGIN_SUCCESS:
       return {
         ...state,
         loading: false,
         currentUser: action.payload,
-        adminUser:null
+        adminUser: null,
       };
 
     case ActionType.ADMIN_REGISTER_SUCCESS:
@@ -37,7 +39,7 @@ export const authReducer = (state = initialState, action) => {
         ...state,
         loading: false,
         adminUser: action.payload,
-        currentUser:null
+        currentUser: null,
       };
 
     case ActionType.SET_USER:
@@ -50,6 +52,7 @@ export const authReducer = (state = initialState, action) => {
     case ActionType.REGISTER_FAIL:
     case ActionType.LOGIN_FAIL:
     case ActionType.LOGOUT_FAIL:
+    case ActionType.GOOGLE_LOGIN_FAIL:
       return {
         ...state,
         loading: false,

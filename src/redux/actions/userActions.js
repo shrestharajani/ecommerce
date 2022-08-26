@@ -1,6 +1,12 @@
 import { ActionType } from "./ActionType";
 import { firestore_db } from "../../firebase";
-import { doc, getDocs, collection, setDoc } from "firebase/firestore";
+import {
+  doc,
+  getDocs,
+  deleteDoc,
+  collection,
+  setDoc,
+} from "firebase/firestore";
 
 const getUserStart = () => ({
   type: ActionType.GET_USER,
@@ -37,6 +43,18 @@ const addHistorySuccess = () => ({
 
 const addHistoryFailed = () => ({
   type: ActionType.ADD_HISTORY_FAIL,
+});
+
+const deleteHistoryStart = () => ({
+  type: ActionType.DELETE_HISTORY_START,
+});
+
+const deleteHistorySuccess = () => ({
+  type: ActionType.DELETE_PURCHASE_HISTORY,
+});
+
+const deleteHistoryFailed = () => ({
+  type: ActionType.DELETE_HISTORY_FAIL,
 });
 
 const getOrderStart = () => ({
@@ -94,6 +112,17 @@ export const addOrder = (history) => async (dispatch) => {
     dispatch(addHistorySuccess(addhistory));
   } catch (error) {
     dispatch(addHistoryFailed(error));
+  }
+};
+
+export const deleteHistory = (id) => async (dispatch) => {
+  dispatch(deleteHistoryStart());
+
+  await deleteDoc(doc(firestore_db, "Order History", `${id}`));
+  try {
+    dispatch(deleteHistorySuccess());
+  } catch (error) {
+    dispatch(deleteHistoryFailed(error));
   }
 };
 
