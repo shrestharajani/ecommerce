@@ -3,7 +3,6 @@ import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer } from "react-toastify";
 import { Routes, Route, useLocation } from "react-router-dom";
 import "./App.css";
-import ForgotPassword from "./pages/auth/ForgotPassword";
 import { auth } from "./firebase";
 import { useDispatch } from "react-redux";
 import Navbar from "./components/Navbar";
@@ -99,11 +98,6 @@ function App() {
           <Breadcrumb className="ant-breadcrumb">{breadcrumbItems}</Breadcrumb>
           <Routes>
             <Route exact path="/" element={<Home />}></Route>
-            <Route
-              exact
-              path="/forgot/password"
-              element={<ForgotPassword />}
-            ></Route>
             <Route exact path="/add-to-cart" element={<AddToCart />}></Route>
             <Route path="feature-product" element={<FeatureProducts />} />
             <Route path="/beer" element={<Beer />} />
